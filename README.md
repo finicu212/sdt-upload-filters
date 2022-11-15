@@ -1,10 +1,13 @@
-Task
+
 Create a platform that allows to set up rules for ingesting and processing large amounts of data. The platform should allow selecting different data sources as streams (for example from network connections or files) and to configure a number of filters/handlers for each data stream. Result of each pipeline should also be collected in a configurable end destination. Filters can be duplicated, modified, composed. It must be possible to also attach loggers/observers to different parts of the pipeline for debugging.
+
+
 Design patterns:
-Chain of Responsibility (data stream filters / handlers)
-Decorators (loggers / observers)
-Object Pool
-Builder / Factory for Connection OR Singleton Clipboard
+
+- Chain of Responsibility (data stream filters / handlers)
+- Decorators (loggers / observers)
+- Object Pool
+- Builder / Factory for Connection OR Singleton Clipboard
 
 ![image](https://user-images.githubusercontent.com/44416281/201999065-1661b143-e832-4892-af23-0a3d6f560ba8.png)
 
@@ -28,18 +31,3 @@ Code https://pastebin.com/jfCfqir0
 
 
 https://pastebin.com/nXATujyU
-
-List of patterns
-Static Factory Method 
-getMyList(enum List) -> list 
-Builder 
-NutritionFacts cocaCola = new NutritionFacts.Builder("cola").calories(100).sodium(35).build();
-Decorator 
-LoggingDecorator loggedList = new LoggingDecorator(MyList.getList(ListType.Array); loggedList.add(5);
-Strategy (pass a func )
-Adapter (to help with refactoring legacy) - An adapter has a field of type its trying to "adapt"
-Chain of Responsibility  
-Object Pool
-Prototype
-Observer (android ListView)
-
