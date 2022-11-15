@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/google/uuid v1.3.0
+	github.com/kardianos/ftps v1.0.3
 	github.com/spf13/cobra v1.6.1
 )
 

@@ -5,11 +5,12 @@ import (
 	"io"
 )
 
-type ConnectionType uint8
-
-const (
-	FTP ConnectionType = 0
-)
+// TODO: Custom Connection Types
+//type Type uint8
+//
+//const (
+//	FTP Type = 0
+//)
 
 type IConnection interface {
 	Store(reader io.Reader)
@@ -24,7 +25,7 @@ func (c Connection) Store(reader io.Reader) {
 	panic("implement me")
 }
 
-// NewConnection instanciates a new Connection
+// NewConnection instantiates a new Connection
 func NewConnection() (IConnection, error) {
 	id, err := uuid.NewRandom()
 	if err != nil {
