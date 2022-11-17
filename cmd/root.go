@@ -79,13 +79,14 @@ func rootCmd() *cobra.Command {
 	cmd.Flags().StringSliceVarP(&files, FlagFiles, FlagFilesP, []string{"file.txt"}, "A list of comma separated files you want to upload in parallel, if the available connections permit it.\nIf not enough connections are available in the pool, we will split the load sequentially")
 
 	cmd.Flags().SortFlags = false
+	cmd.SilenceUsage = true
 
 	return cmd
 }
 
 func Execute() {
 	if err := rootCmd().Execute(); err != nil {
-		_, _ = fmt.Fprintln(os.Stderr, err)
+		//_, _ = fmt.Fprintln(os.Stderr, fmt.Errorf("ERROR: %w", err))
 		os.Exit(1)
 	}
 }
