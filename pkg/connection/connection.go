@@ -1,7 +1,9 @@
 package connection
 
 import (
+	"context"
 	"github.com/google/uuid"
+	"github.com/kardianos/ftps"
 	"io"
 )
 
@@ -13,25 +15,43 @@ import (
 //)
 
 type IConnection interface {
-	Store(reader io.Reader)
+	Store(filename string, reader io.Reader) error
 }
 
-type Connection struct {
-	UUID string
+type FTPConnection struct {
+	UUID   string
+	client *ftps.Client
+	ctx    context.Context
 }
 
-func (c Connection) Store(reader io.Reader) {
-	//TODO implement me
-	panic("implement me")
+func (c FTPConnection) Store(filename string, reader io.Reader) error {
+	return c.client.Upload(c.ctx, filename, reader)
 }
 
-// NewConnection instantiates a new Connection
-func NewConnection() (IConnection, error) {
+// NewFTPConnection instantiates a new Connection
+func NewFTPConnection(ctx context.Context, username, password, url string, port int) (IConnection, error) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+
 	id, err := uuid.NewRandom()
 	if err != nil {
 		return nil, err
 	}
-	return Connection{
-		UUID: id.String(),
+
+	c, err := ftps.Dial(ctx, ftps.DialOptions{
+		Username: username,
+		Passowrd: password,
+		Host:     url,
+		Port:     port,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return FTPConnection{
+		UUID:   id.String(),
+		ctx:    ctx,
+		client: c,
 	}, nil
 }

@@ -11,7 +11,7 @@ type MockConnection struct {
 	UUID string
 }
 
-func (m MockConnection) Store(_ io.Reader) {
+func (m MockConnection) Store(_ string, _ io.Reader) error {
 	panic("this is just a mock!")
 }
 

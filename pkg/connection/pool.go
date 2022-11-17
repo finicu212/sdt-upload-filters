@@ -1,6 +1,7 @@
 package connection
 
 import (
+	"context"
 	"errors"
 )
 
@@ -15,31 +16,44 @@ var (
 type IPool interface {
 	// GetConnection calls newConnection if no connections exist in the pool,
 	// otherwise calls existingConnection which should return an already existing connection.
-	GetConnection() (IConnection, error)
-	TimeoutConnection()
+	GetConnection(username string, password string) (IConnection, error)
+	//TimeoutConnection()
 	ReleaseConnection(IConnection) error
 
 	// private methods
-	newConnection() (IConnection, error)
-	existingConnection() (IConnection, error)
+	existingConnection() IConnection
 }
 
 type Pool struct {
+	url         string
+	port        int
 	connections []IConnection
 }
 
-func (p Pool) GetConnection() (IConnection, error) {
+func (p Pool) DropConnection() {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (p Pool) ReleaseConnection(connection IConnection) error {
+	//TODO implement me
+	panic("implement me")
+
+	// Set a
+}
+
+func NewPool(url string, port int) IPool {
+	return Pool{url: url, port: port}
+}
+
+func (p Pool) GetConnection(username, password string) (IConnection, error) {
 	if len(p.connections) > 0 {
 		return p.existingConnection(), nil
 	}
 	if len(p.connections) < ConnectionsLimit {
-		return p.newConnection()
+		return NewFTPConnection(context.Background(), username, password, p.url, p.port)
 	}
 	return nil, ErrConnectionLimit
-}
-
-func (p Pool) newConnection() (IConnection, error) {
-	return NewConnection() // Call the constructor with some params
 }
 
 func (p Pool) existingConnection() IConnection {
@@ -48,6 +62,5 @@ func (p Pool) existingConnection() IConnection {
 	}
 	var x IConnection
 	x, p.connections = p.connections[0], p.connections[1:]
-	//p.connections = cs
 	return x
 }
