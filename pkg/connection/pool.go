@@ -3,8 +3,6 @@ package connection
 import (
 	"context"
 	"errors"
-	"net"
-	"sdt-upload-filters/pkg/utils"
 )
 
 const (
@@ -15,26 +13,10 @@ var (
 	ErrConnectionLimit = errors.New("hit connection limit, please try again later")
 )
 
-func ConnectToIPs(ips []net.IP) []IPool {
-	for _, ip := range ips {
-		url, port, err := utils.SplitHostPort(ip)
-		if err != nil {
-			return err
-		}
-		pool := connection.NewPool(url, port)
-		c, err := pool.GetConnection("root", "root")
-		if err != nil {
-			c = connection.NewMockConnection()
-		}
-		conns = append(conns, c)
-	}
-}
-
 type IPool interface {
-	// GetConnection calls newConnection if no connections exist in the pool,
+	// GetConnection creates new connection via constructor if no connections exist in the pool,
 	// otherwise calls existingConnection which should return an already existing connection.
-	GetConnection(username string, password string) (IConnection, error)
-	//TimeoutConnection()
+	GetConnection() (IConnection, error)
 	ReleaseConnection(IConnection) error
 
 	// private methods
@@ -42,13 +24,15 @@ type IPool interface {
 }
 
 type Pool struct {
+	user        string
+	pass        string
 	url         string
 	port        int
 	connections []IConnection
 }
 
-func NewPool(url string, port int) IPool {
-	return Pool{url: url, port: port}
+func NewPool(user, pass, url string, port int) IPool {
+	return Pool{url: url, port: port, user: user, pass: pass}
 }
 
 func (p Pool) DropConnection() {
@@ -61,12 +45,12 @@ func (p Pool) ReleaseConnection(connection IConnection) error {
 	panic("implement me")
 }
 
-func (p Pool) GetConnection(username, password string) (IConnection, error) {
+func (p Pool) GetConnection() (IConnection, error) {
 	if len(p.connections) > 0 {
 		return p.existingConnection(), nil
 	}
 	if len(p.connections) < ConnectionsLimit {
-		return NewFTPConnection(context.Background(), username, password, p.url, p.port)
+		return NewFTPConnection(context.Background(), p.user, p.pass, p.url, p.port)
 	}
 	return nil, ErrConnectionLimit
 }

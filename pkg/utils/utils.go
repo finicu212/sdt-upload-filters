@@ -5,8 +5,8 @@ import (
 	"strconv"
 )
 
-func SplitHostPort(hostport net.IP) (string, int, error) {
-	url, port, err := net.SplitHostPort(string(hostport))
+func SplitHostPort(hostport string) (string, int, error) {
+	url, port, err := net.SplitHostPort(hostport)
 	if err != nil {
 		return "", 0, err
 	}
@@ -15,4 +15,12 @@ func SplitHostPort(hostport net.IP) (string, int, error) {
 		return "", 0, err
 	}
 	return url, portInt, nil
+}
+
+func Repeated[T any](val T, times int) []T {
+	arr := make([]T, times)
+	for i := 0; i < times; i++ {
+		arr[i] = val
+	}
+	return arr
 }
