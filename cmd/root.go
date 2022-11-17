@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
-	"log"
 	"os"
 	"sdt-upload-filters/pkg/connection"
 	"sdt-upload-filters/pkg/utils"
@@ -40,7 +39,7 @@ func rootCmd() *cobra.Command {
 				return err
 			}
 
-			// To avoid extra work of handling this adequately... this be okay enough to do, honestly
+			// To avoid extra work of handling this adequately... this should be okay enough to do, honestly
 			if len(usernames) == 1 {
 				usernames = utils.Repeated(usernames[0], len(ips))
 			}
@@ -55,20 +54,19 @@ func rootCmd() *cobra.Command {
 				return ErrUrlsNotEnoughCreds
 			}
 
-			log.Printf("%+v\n", usernames)
-			log.Printf("%+v\n", passwords)
-			log.Printf("%+v\n", ips)
-			log.Printf("%+v\n", files)
-
 			return nil
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			orchestrator, err := connection.NewOrchestrator(ips, usernames, passwords)
+			o, err := connection.NewOrchestrator(ips, usernames, passwords)
 			if err != nil {
 				return err
 			}
 
-			fmt.Printf("%+v\n", orchestrator)
+			readers, err := utils.PathsAsReaders(files)
+			if err != nil {
+				return err
+			}
+			//o.BuildQueues(readers)
 			return nil
 		},
 	}
