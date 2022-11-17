@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfd05e21-50d1-40bd-9a92-c4b24bc7bc6e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/kardianos/ftps/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/kardianos/ftps/ftps.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/connection/connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/connection.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/connection/pool.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/pool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/connection/pool_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/pool_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +50,7 @@
     "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
-    "last_opened_file_path": "/home/avirtopeanu/go/src/ionosctl"
+    "last_opened_file_path": "/home/avirtopeanu/go/src/sdt-upload-filters"
   }
 }]]></component>
   <component name="RunManager" selected="Go Test.go test sdt-upload-filters/pkg/connection">
@@ -128,6 +125,9 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

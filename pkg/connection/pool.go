@@ -30,6 +30,10 @@ type Pool struct {
 	connections []IConnection
 }
 
+func NewPool(url string, port int) IPool {
+	return Pool{url: url, port: port}
+}
+
 func (p Pool) DropConnection() {
 	//TODO implement me
 	panic("implement me")
@@ -40,10 +44,6 @@ func (p Pool) ReleaseConnection(connection IConnection) error {
 	panic("implement me")
 
 	// Set a
-}
-
-func NewPool(url string, port int) IPool {
-	return Pool{url: url, port: port}
 }
 
 func (p Pool) GetConnection(username, password string) (IConnection, error) {
