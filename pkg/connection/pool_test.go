@@ -1,26 +1,9 @@
 package connection
 
 import (
-	"github.com/google/uuid"
-	"io"
 	"reflect"
 	"testing"
 )
-
-type MockConnection struct {
-	UUID string
-}
-
-func (m MockConnection) Store(_ string, _ io.Reader) error {
-	panic("this is just a mock!")
-}
-
-func NewMockConnection() IConnection {
-	id, _ := uuid.NewRandom()
-	return MockConnection{
-		UUID: id.String(),
-	}
-}
 
 func TestPool_existingConnection(t *testing.T) {
 	conn1 := NewMockConnection()

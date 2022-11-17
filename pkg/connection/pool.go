@@ -3,6 +3,8 @@ package connection
 import (
 	"context"
 	"errors"
+	"net"
+	"sdt-upload-filters/pkg/utils"
 )
 
 const (
@@ -12,6 +14,21 @@ const (
 var (
 	ErrConnectionLimit = errors.New("hit connection limit, please try again later")
 )
+
+func ConnectToIPs(ips []net.IP) []IPool {
+	for _, ip := range ips {
+		url, port, err := utils.SplitHostPort(ip)
+		if err != nil {
+			return err
+		}
+		pool := connection.NewPool(url, port)
+		c, err := pool.GetConnection("root", "root")
+		if err != nil {
+			c = connection.NewMockConnection()
+		}
+		conns = append(conns, c)
+	}
+}
 
 type IPool interface {
 	// GetConnection calls newConnection if no connections exist in the pool,
@@ -42,8 +59,6 @@ func (p Pool) DropConnection() {
 func (p Pool) ReleaseConnection(connection IConnection) error {
 	//TODO implement me
 	panic("implement me")
-
-	// Set a
 }
 
 func (p Pool) GetConnection(username, password string) (IConnection, error) {

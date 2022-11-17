@@ -16,6 +16,7 @@ import (
 
 type IConnection interface {
 	Store(filename string, reader io.Reader) error
+	GetUUID() string
 }
 
 type FTPConnection struct {
@@ -26,6 +27,10 @@ type FTPConnection struct {
 
 func (c FTPConnection) Store(filename string, reader io.Reader) error {
 	return c.client.Upload(c.ctx, filename, reader)
+}
+
+func (c FTPConnection) GetUUID() string {
+	return c.UUID
 }
 
 // NewFTPConnection instantiates a new Connection
@@ -54,4 +59,25 @@ func NewFTPConnection(ctx context.Context, username, password, url string, port 
 		ctx:    ctx,
 		client: c,
 	}, nil
+}
+
+// Mocks. To be auto gen
+
+type MockConnection struct {
+	UUID string
+}
+
+func (m MockConnection) GetUUID() string {
+	return m.UUID
+}
+
+func (m MockConnection) Store(_ string, _ io.Reader) error {
+	panic("this is just a mock!")
+}
+
+func NewMockConnection() IConnection {
+	id, _ := uuid.NewRandom()
+	return MockConnection{
+		UUID: id.String(),
+	}
 }
