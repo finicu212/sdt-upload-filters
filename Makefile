@@ -6,6 +6,7 @@ ftp:
 	docker run -d \
 		--env-file=./config.env \
 		-p $(PORT):$(PORT) \
+		-p $(PSV_PORTS) \
 		-e $(LIST_USER) \
 		--name my_ftp \
 		delfer/alpine-ftp-server && docker ps
