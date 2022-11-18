@@ -66,7 +66,8 @@ func rootCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			//o.BuildQueues(readers)
+			o.AddToQueue(readers)
+
 			return nil
 		},
 	}
