@@ -24,16 +24,21 @@ func NewOrchestrator(ips []string, usernames []string, passwords []string) (o *O
 	return o, nil
 }
 
-func (o *Orchestrator) AddToQueue(files []file.FileDetails) {
+func (o *Orchestrator) addToQueue(files []file.FileDetails) {
 	for _, p := range o.pools {
 		p.Q().AddToQueue(files)
 	}
 }
 
-// HandleQueue feeds files to the connection pools that have available connections.
+func (o *Orchestrator) Handle(files []file.FileDetails) error {
+	o.addToQueue(files)
+	return o.handleQueue()
+}
+
+// handleQueue feeds files to the connection pools that have available connections.
 // If a connection pool is currently filled, skip it.
 // Once we iterate through all the connection pools, wait 5s, and start this process once again with only non-empty queues
-func (o *Orchestrator) HandleQueue() error {
+func (o *Orchestrator) handleQueue() error {
 	q := o.dropPoolsWithEmptyQueues()
 	for ; len(q) > 0; q = o.dropPoolsWithEmptyQueues() {
 		for _, p := range o.pools {
