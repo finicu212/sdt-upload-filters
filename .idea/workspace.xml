@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfd05e21-50d1-40bd-9a92-c4b24bc7bc6e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pkg/file/file.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/connection/orchestrator.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/orchestrator.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/connection/pool.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/pool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/utils/reader.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +57,11 @@
     "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pkg/file" />
+    </key>
+  </component>
   <component name="RunManager" selected="Go Build.go build main.go">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="sdt-upload-filters" />

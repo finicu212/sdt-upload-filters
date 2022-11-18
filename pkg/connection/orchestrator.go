@@ -1,7 +1,7 @@
 package connection
 
 import (
-	"io"
+	"sdt-upload-filters/pkg/file"
 	"sdt-upload-filters/pkg/utils"
 	"time"
 )
@@ -24,7 +24,7 @@ func NewOrchestrator(ips []string, usernames []string, passwords []string) (o *O
 	return o, nil
 }
 
-func (o *Orchestrator) AddToQueue(files []io.Reader) {
+func (o *Orchestrator) AddToQueue(files []file.FileDetails) {
 	for _, p := range o.pools {
 		p.AddToQueue(files)
 	}
@@ -45,7 +45,7 @@ func (o *Orchestrator) HandleQueue() error {
 				return err
 			}
 			nextFile := p.PopQueue()
-			err = newConn.Store("TODO", nextFile)
+			err = newConn.Store("TODO", nextFile.DataReader)
 			if err != nil {
 				return err
 			}

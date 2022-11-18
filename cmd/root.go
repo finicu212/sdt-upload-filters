@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"os"
 	"sdt-upload-filters/pkg/connection"
+	"sdt-upload-filters/pkg/file"
 	"sdt-upload-filters/pkg/utils"
 )
 
@@ -62,11 +63,16 @@ func rootCmd() *cobra.Command {
 				return err
 			}
 
-			readers, err := utils.PathsAsReaders(files)
+			fileDetails, err := file.ManyFileDetails(files)
 			if err != nil {
 				return err
 			}
-			o.AddToQueue(readers)
+			o.AddToQueue(fileDetails)
+
+			err = o.HandleQueue()
+			if err != nil {
+				return err
+			}
 
 			return nil
 		},

@@ -3,7 +3,7 @@ package connection
 import (
 	"context"
 	"errors"
-	"io"
+	"sdt-upload-filters/pkg/file"
 )
 
 const (
@@ -20,16 +20,16 @@ type IPool interface {
 	// otherwise calls existingConnection which should return an already existing connection.
 	GetConnection() (IConnection, error)
 	ReleaseConnection(IConnection) error
-	AddToQueue(files []io.Reader)
-	GetQueue() []io.Reader
-	PopQueue() io.Reader
+	AddToQueue(files []file.FileDetails)
+	GetQueue() []file.FileDetails
+	PopQueue() file.FileDetails
 
 	// private methods
 	existingConnection() IConnection
 }
 
 type Pool struct {
-	buffQueue []io.Reader // Queue of buffers which still need to be uploaded to this pool's server
+	queue []file.FileDetails // Queue of buffers which still need to be uploaded to this pool's server
 
 	user        string
 	pass        string
@@ -71,15 +71,15 @@ func (p Pool) existingConnection() IConnection {
 	return x
 }
 
-func (p Pool) AddToQueue(files []io.Reader) {
-	p.buffQueue = append(p.buffQueue, files...)
+func (p Pool) AddToQueue(files []file.FileDetails) {
+	p.queue = append(p.queue, files...)
 }
 
-func (p Pool) GetQueue() []io.Reader {
-	return p.buffQueue
+func (p Pool) GetQueue() []file.FileDetails {
+	return p.queue
 }
 
-func (p Pool) PopQueue() (next io.Reader) {
-	next, p.buffQueue = p.buffQueue[0], p.buffQueue[1:]
+func (p Pool) PopQueue() (next file.FileDetails) {
+	next, p.queue = p.queue[0], p.queue[1:]
 	return next
 }
