@@ -34,8 +34,8 @@ func (o *Orchestrator) AddToQueue(files []file.FileDetails) {
 // If a connection pool is currently filled, skip it.
 // Once we iterate through all the connection pools, wait 5s, and start this process once again with only non-empty queues
 func (o *Orchestrator) HandleQueue() error {
-	q := o.DropPoolsWithEmptyQueues()
-	for ; len(q) > 0; q = o.DropPoolsWithEmptyQueues() {
+	q := o.dropPoolsWithEmptyQueues()
+	for ; len(q) > 0; q = o.dropPoolsWithEmptyQueues() {
 		for _, p := range o.pools {
 			newConn, err := p.GetConnection()
 			if err != nil {
@@ -55,7 +55,7 @@ func (o *Orchestrator) HandleQueue() error {
 	return nil
 }
 
-func (o *Orchestrator) DropPoolsWithEmptyQueues() map[string]IPool {
+func (o *Orchestrator) dropPoolsWithEmptyQueues() map[string]IPool {
 	for k, p := range o.pools {
 		if len(p.Q().GetQueue()) == 0 {
 			delete(o.pools, k)
