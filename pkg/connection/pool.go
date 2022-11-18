@@ -20,16 +20,14 @@ type IPool interface {
 	// otherwise calls existingConnection which should return an already existing connection.
 	GetConnection() (IConnection, error)
 	ReleaseConnection(IConnection) error
-	AddToQueue(files []file.FileDetails)
-	GetQueue() []file.FileDetails
-	PopQueue() file.FileDetails
+	Q() file.IFileQueue
 
 	// private methods
 	existingConnection() IConnection
 }
 
 type Pool struct {
-	queue []file.FileDetails // Queue of buffers which still need to be uploaded to this pool's server
+	queue file.IFileQueue // Queue of buffers which still need to be uploaded to this pool's server
 
 	user        string
 	pass        string
@@ -62,6 +60,10 @@ func (p Pool) GetConnection() (IConnection, error) {
 	return nil, ErrConnectionLimit
 }
 
+func (p Pool) Q() file.IFileQueue {
+	return p.queue
+}
+
 func (p Pool) existingConnection() IConnection {
 	if len(p.connections) == 0 {
 		panic("Not enough connections! How did this function get called!?")
@@ -69,17 +71,4 @@ func (p Pool) existingConnection() IConnection {
 	var x IConnection
 	x, p.connections = p.connections[0], p.connections[1:]
 	return x
-}
-
-func (p Pool) AddToQueue(files []file.FileDetails) {
-	p.queue = append(p.queue, files...)
-}
-
-func (p Pool) GetQueue() []file.FileDetails {
-	return p.queue
-}
-
-func (p Pool) PopQueue() (next file.FileDetails) {
-	next, p.queue = p.queue[0], p.queue[1:]
-	return next
 }

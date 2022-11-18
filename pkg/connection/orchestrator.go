@@ -26,7 +26,7 @@ func NewOrchestrator(ips []string, usernames []string, passwords []string) (o *O
 
 func (o *Orchestrator) AddToQueue(files []file.FileDetails) {
 	for _, p := range o.pools {
-		p.AddToQueue(files)
+		p.Q().AddToQueue(files)
 	}
 }
 
@@ -44,7 +44,7 @@ func (o *Orchestrator) HandleQueue() error {
 				}
 				return err
 			}
-			nextFile := p.PopQueue()
+			nextFile := p.Q().PopQueue()
 			err = newConn.Store("TODO", nextFile.DataReader)
 			if err != nil {
 				return err
@@ -57,7 +57,7 @@ func (o *Orchestrator) HandleQueue() error {
 
 func (o *Orchestrator) DropPoolsWithEmptyQueues() map[string]IPool {
 	for k, p := range o.pools {
-		if len(p.GetQueue()) == 0 {
+		if len(p.Q().GetQueue()) == 0 {
 			delete(o.pools, k)
 		}
 	}
