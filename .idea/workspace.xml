@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfd05e21-50d1-40bd-9a92-c4b24bc7bc6e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/connection/connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/connection/orchestrator.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/orchestrator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/connection/pool.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/pool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/file/queue.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/file/queue.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -20,14 +20,14 @@ type IPool interface {
 	// otherwise calls existingConnection which should return an already existing connection.
 	GetConnection() (IConnection, error)
 	ReleaseConnection(IConnection) error
-	Q() file.IFileQueue
+	Q() *file.FileQueue
 
 	// private methods
 	existingConnection() IConnection
 }
 
 type Pool struct {
-	queue file.IFileQueue // Queue of buffers which still need to be uploaded to this pool's server
+	queue *file.FileQueue // Queue of buffers which still need to be uploaded to this pool's server
 
 	user        string
 	pass        string
@@ -37,7 +37,7 @@ type Pool struct {
 }
 
 func NewPool(user, pass, url string, port int) IPool {
-	return Pool{url: url, port: port, user: user, pass: pass}
+	return Pool{url: url, port: port, user: user, pass: pass, queue: new(file.FileQueue)}
 }
 
 func (p Pool) DropConnection() {
@@ -60,7 +60,7 @@ func (p Pool) GetConnection() (IConnection, error) {
 	return nil, ErrConnectionLimit
 }
 
-func (p Pool) Q() file.IFileQueue {
+func (p Pool) Q() *file.FileQueue {
 	return p.queue
 }
 

@@ -1,6 +1,7 @@
 package connection
 
 import (
+	"fmt"
 	"sdt-upload-filters/pkg/file"
 	"sdt-upload-filters/pkg/utils"
 	"time"
@@ -24,14 +25,11 @@ func NewOrchestrator(ips []string, usernames []string, passwords []string) (o *O
 	return o, nil
 }
 
-func (o *Orchestrator) addToQueue(files []file.FileDetails) {
-	for _, p := range o.pools {
-		p.Q().AddToQueue(files)
-	}
-}
-
 func (o *Orchestrator) Handle(files []file.FileDetails) error {
-	o.addToQueue(files)
+	for _, p := range o.pools {
+		q := p.Q()
+		q.AddToQueue(files)
+	}
 	return o.handleQueue()
 }
 
@@ -39,18 +37,23 @@ func (o *Orchestrator) Handle(files []file.FileDetails) error {
 // If a connection pool is currently filled, skip it.
 // Once we iterate through all the connection pools, wait 5s, and start this process once again with only non-empty queues
 func (o *Orchestrator) handleQueue() error {
+	fmt.Println("handleQueue")
 	q := o.dropPoolsWithEmptyQueues()
 	for ; len(q) > 0; q = o.dropPoolsWithEmptyQueues() {
-		for _, p := range o.pools {
+		for k, p := range o.pools {
+			fmt.Printf("IP %s\n", k)
 			newConn, err := p.GetConnection()
 			if err != nil {
 				if err == ErrConnectionLimit {
+					fmt.Printf("Skipping pool for IP %s as it is currently busy\n", k)
 					continue
 				}
 				return err
 			}
-			nextFile := p.Q().PopQueue()
-			err = newConn.Store("TODO", nextFile.DataReader)
+			q := p.Q()
+			nextFile := q.PopQueue()
+			err = newConn.Store(nextFile.RemotePath, nextFile.DataReader)
+			fmt.Printf("Ran Store(%s)\n", nextFile.RemotePath)
 			if err != nil {
 				return err
 			}
@@ -62,7 +65,9 @@ func (o *Orchestrator) handleQueue() error {
 
 func (o *Orchestrator) dropPoolsWithEmptyQueues() map[string]IPool {
 	for k, p := range o.pools {
-		if len(p.Q().GetQueue()) == 0 {
+		q := p.Q()
+		if len(q.GetQueue()) == 0 {
+			fmt.Printf("Dropped empty queue over IP %s\n", k)
 			delete(o.pools, k)
 		}
 	}

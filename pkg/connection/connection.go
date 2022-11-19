@@ -2,9 +2,11 @@ package connection
 
 import (
 	"context"
+	"crypto/tls"
 	"github.com/google/uuid"
 	"github.com/kardianos/ftps"
 	"io"
+	"path"
 )
 
 // TODO: Custom Connection Types
@@ -25,7 +27,15 @@ type FTPConnection struct {
 	ctx    context.Context
 }
 
-func (c FTPConnection) Store(filename string, reader io.Reader) error {
+func (c FTPConnection) Store(filepath string, reader io.Reader) error {
+	filename := path.Base(filepath)
+	if filename != filepath {
+		// If filepath consists of a directory structure
+		err := c.client.Chdir(path.Dir(filepath))
+		if err != nil {
+			return err
+		}
+	}
 	return c.client.Upload(c.ctx, filename, reader)
 }
 
@@ -45,10 +55,16 @@ func NewFTPConnection(ctx context.Context, username, password, url string, port 
 	}
 
 	c, err := ftps.Dial(ctx, ftps.DialOptions{
-		Username: username,
-		Passowrd: password,
-		Host:     url,
-		Port:     port,
+		Username:    username,
+		Passowrd:    password,
+		Host:        url,
+		Port:        port,
+		ExplicitTLS: true, // TODO: If you are forking this repo, review these critical security settings!
+		TLSConfig: &tls.Config{
+			ServerName:         url,
+			InsecureSkipVerify: false,            // TODO: If you are forking this repo, review these critical security settings!
+			MaxVersion:         tls.VersionTLS12, // TODO: If you are forking this repo, review these critical security settings!
+		},
 	})
 	if err != nil {
 		return nil, err

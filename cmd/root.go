@@ -79,7 +79,7 @@ func rootCmd() *cobra.Command {
 
 	cmd.Flags().StringSliceVarP(&usernames, FlagUsers, FlagUsersP, []string{os.Getenv("FTPUSER")}, "A list of comma separated usernames, to use for connecting to each URL. Must be only one, or the same length as --files flag")
 	cmd.Flags().StringSliceVarP(&passwords, FlagPass, FlagPassP, []string{os.Getenv("PASS")}, "A list of comma separated passwords, to use for connecting to each URL. Must be only one, or the same length as --files flag")
-	cmd.Flags().StringSliceVarP(&ips, FlagUrls, FlagUrlsP, []string{"82.79.159.78:21"}, "A list of comma separated URLs you want to upload the files to")
+	cmd.Flags().StringSliceVarP(&ips, FlagUrls, FlagUrlsP, []string{"ftp-fra.ionos.com:21", "ftp-fkb.ionos.com:21"}, "A list of comma separated URLs you want to upload the files to")
 	cmd.Flags().StringSliceVarP(&files, FlagFiles, FlagFilesP, []string{"file.txt"}, "A list of comma separated files you want to upload in parallel, if the available connections permit it. If not enough connections are available in the pool, we will split the load sequentially")
 
 	cmd.Flags().SortFlags = false
