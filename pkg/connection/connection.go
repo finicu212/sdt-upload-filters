@@ -19,12 +19,17 @@ import (
 type IConnection interface {
 	Store(filename string, reader io.Reader) error
 	GetUUID() string
+	Context() context.Context
 }
 
 type FTPConnection struct {
 	UUID   string
 	client *ftps.Client
 	ctx    context.Context
+}
+
+func (c FTPConnection) Context() context.Context {
+	return c.ctx
 }
 
 func (c FTPConnection) Store(filepath string, reader io.Reader) error {
@@ -81,6 +86,11 @@ func NewFTPConnection(ctx context.Context, username, password, url string, port 
 
 type MockConnection struct {
 	UUID string
+}
+
+func (m MockConnection) Context() context.Context {
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m MockConnection) GetUUID() string {

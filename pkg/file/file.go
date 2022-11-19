@@ -30,7 +30,7 @@ func NewFileDetails(path string) (fd FileDetails, err error) {
 	}
 	fd.DataReader = rd
 	fd.LocalPath = path
-	fd.RemotePath = path // placeholder
+	fd.RemotePath = "iso-images/" + path // placeholder
 	return fd, nil
 }
 

@@ -6,6 +6,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/kardianos/ftps v1.0.3
 	github.com/spf13/cobra v1.6.1
+	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 )
 
 require (

@@ -3,12 +3,13 @@ package connection
 import (
 	"context"
 	"errors"
+	"fmt"
 	"sdt-upload-filters/pkg/file"
 )
 
 const (
 	// ConnectionsLimit is used for every pool. Each pool can have its independent limit, but we use this to keep things simple
-	ConnectionsLimit int = 10
+	ConnectionsLimit int = 2
 )
 
 var (
@@ -18,7 +19,7 @@ var (
 type IPool interface {
 	// GetConnection creates new connection via constructor if no connections exist in the pool,
 	// otherwise calls existingConnection which should return an already existing connection.
-	GetConnection() (IConnection, error)
+	GetConnection(ctx context.Context) (IConnection, error)
 	ReleaseConnection(IConnection) error
 	Q() *file.FileQueue
 
@@ -50,12 +51,13 @@ func (p Pool) ReleaseConnection(connection IConnection) error {
 	panic("implement me")
 }
 
-func (p Pool) GetConnection() (IConnection, error) {
+func (p Pool) GetConnection(ctx context.Context) (IConnection, error) {
 	if len(p.connections) > 0 {
 		return p.existingConnection(), nil
 	}
 	if len(p.connections) < ConnectionsLimit {
-		return NewFTPConnection(context.Background(), p.user, p.pass, p.url, p.port)
+		fmt.Printf("New FTP connection: %s on %s\n", p.user, p.url)
+		return NewFTPConnection(ctx, p.user, p.pass, p.url, p.port)
 	}
 	return nil, ErrConnectionLimit
 }
