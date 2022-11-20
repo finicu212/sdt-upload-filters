@@ -61,6 +61,8 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Printf("UploadHandler with conn: %s", conn.GetUUID())
+
 	// 64MB RAM, rest temp files
 	if err := r.ParseMultipartForm(64 << 20); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -87,11 +89,14 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Failed writing to file: %s", err.Error()), http.StatusInternalServerError)
 			return
 		}
+		fmt.Printf("handled a file\n")
 	}
+	fmt.Printf("done with conn\n")
 	err := pool.Instance().ReleaseConnection(conn)
 	if err != nil {
 		return
 	}
+	fmt.Printf("Released connection... going to serve login page\n")
 	http.ServeFile(w, r, "index.html")
 	//outputHTML(w, "index.html", vars)
 }

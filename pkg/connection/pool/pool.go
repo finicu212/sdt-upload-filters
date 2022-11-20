@@ -27,7 +27,8 @@ type IPool interface {
 }
 
 type Pool struct {
-	connections []connection.IConnection
+	connections       []connection.IConnection
+	activeConnections int
 }
 
 var (
@@ -55,31 +56,28 @@ func Instance() IPool {
 	return instance
 }
 
-func (p Pool) DropConnection() {
+func (p *Pool) DropConnection() {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p Pool) ReleaseConnection(connection connection.IConnection) error {
-	for i, c := range p.connections {
-		if c.GetUUID() == connection.GetUUID() {
-			_, p.connections = p.connections[i], p.connections[i:]
-			return nil
-		}
-	}
-	return fmt.Errorf("no connection found with UUID: %s", connection.GetUUID())
+func (p *Pool) ReleaseConnection(connection connection.IConnection) error {
+	lock.Lock()
+	defer lock.Unlock()
+	p.connections = append(p.connections, connection)
+	return nil
 }
 
-func (p Pool) GetConnection(ctx context.Context) (connection.IConnection, error) {
+func (p *Pool) GetConnection(ctx context.Context) (connection.IConnection, error) {
 	lock.Lock()
 	defer lock.Unlock()
 	if len(p.connections) > 0 {
 		fmt.Printf("Existing connections: %d/%d\n", len(p.connections), ConnectionsLimit)
 		return p.existingConnection(), nil
 	}
-	if len(p.connections) < ConnectionsLimit {
+	if p.activeConnections < ConnectionsLimit {
 		conn := connection.NewConnection(ctx)
-		p.connections = append(p.connections, conn)
+		p.activeConnections += 1
 		fmt.Printf("New connection: %s! (%d/%d)\n", conn.GetUUID(), len(p.connections), ConnectionsLimit)
 
 		return conn, nil
@@ -87,14 +85,16 @@ func (p Pool) GetConnection(ctx context.Context) (connection.IConnection, error)
 	return nil, ErrConnectionLimit
 }
 
-func (p Pool) existingConnection() connection.IConnection {
-	lock.Lock()
-	defer lock.Unlock()
+func (p *Pool) existingConnection() connection.IConnection {
 	if len(p.connections) == 0 {
 		panic("Not enough connections! How did this function get called!?")
 	}
+	if len(p.connections) == 1 {
+		x := p.connections[0]
+		p.connections = nil
+		return x
+	}
 	var x connection.IConnection
 	x, p.connections = p.connections[0], p.connections[1:]
-	fmt.Printf("Using existing connection: %s! (%d/%d)\n", x.GetUUID(), len(p.connections), ConnectionsLimit)
 	return x
 }
