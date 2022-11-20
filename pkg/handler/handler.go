@@ -16,8 +16,8 @@ func stringToHandler(chain string) IHandler {
 	switch chain {
 	case "reverser":
 		return Reverser{}
-	case "duplicator":
-		return Duplicator{}
+	case "skipper":
+		return Skipper{}
 	case "default":
 	}
 	panic("wrong handler type: " + chain)
@@ -65,16 +65,27 @@ func (h Reverser) SetNext(handler IHandler) IHandler {
 	return h
 }
 
-type Duplicator struct {
+type Skipper struct {
 	next IHandler
 }
 
-func (h Duplicator) Handle(writer io.Writer, reader io.Reader) {
-	io.Copy(writer, reader)
-	io.Copy(writer, reader)
+func (h Skipper) Handle(writer io.Writer, reader io.Reader) {
+	b, err := ioutil.ReadAll(reader)
+	if err != nil {
+		panic(err)
+	}
+	readSeeker := bytes.NewReader(b)
+	_, err = readSeeker.Seek(16, io.SeekStart)
+	if err != nil {
+		panic(err)
+	}
+	_, err = io.Copy(writer, readSeeker)
+	if err != nil {
+		panic(err)
+	}
 }
 
-func (h Duplicator) SetNext(handler IHandler) IHandler {
+func (h Skipper) SetNext(handler IHandler) IHandler {
 	h.next = handler
 	return h
 }

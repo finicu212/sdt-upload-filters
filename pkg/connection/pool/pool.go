@@ -57,7 +57,7 @@ func Instance() IPool {
 }
 
 func (p *Pool) DropConnection() {
-	//TODO implement me
+	//TODO Connection timeout if not used for x seconds
 	panic("implement me")
 }
 
