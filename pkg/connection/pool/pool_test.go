@@ -1,40 +1,42 @@
-package connection
+package pool
 
 import (
+	"context"
 	"reflect"
+	"sdt-upload-filters/pkg/connection"
 	"testing"
 )
 
 func TestPool_existingConnection(t *testing.T) {
-	conn1 := NewMockConnection()
-	conn2 := NewMockConnection()
+	conn1 := connection.NewConnection(context.TODO())
+	conn2 := connection.NewConnection(context.TODO())
 	type fields struct {
-		connections []IConnection
+		connections []connection.IConnection
 	}
 	tests := []struct {
 		name      string
 		fields    fields
-		want      IConnection
+		want      connection.IConnection
 		wantPanic bool
 	}{
 		{
 			name: "Only one existing connection",
 			fields: fields{
-				connections: []IConnection{conn1},
+				connections: []connection.IConnection{conn1},
 			},
 			want: conn1,
 		},
 		{
 			name: "Three connections",
 			fields: fields{
-				connections: []IConnection{conn2, conn1, conn1, conn1},
+				connections: []connection.IConnection{conn2, conn1, conn1, conn1},
 			},
 			want: conn2,
 		},
 		{
 			name: "No connections, expect panic",
 			fields: fields{
-				connections: []IConnection{},
+				connections: []connection.IConnection{},
 			},
 			want:      nil,
 			wantPanic: true,
