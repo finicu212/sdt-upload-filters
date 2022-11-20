@@ -35,7 +35,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Add("Content-Type", "text/html")
-	http.ServeFile(w, r, "index.html")
+	http.ServeFile(w, r, "html/index.html")
 }
 
 func SubmitHandler(w http.ResponseWriter, r *http.Request) {
@@ -51,8 +51,8 @@ func SubmitHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Content-Type", "text/html")
 	vars := map[string]interface{}{"UUID": conn.GetUUID()}
-	//http.ServeFile(w, r, "submit.html")
-	outputHTML(w, "submit.html", vars)
+	//http.ServeFile(w, r, "html/submit.html")
+	outputHTML(w, "html/submit.html", vars)
 }
 
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
@@ -95,6 +95,6 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Printf("Released connection... going to serve login page\n")
-	http.ServeFile(w, r, "index.html")
-	//outputHTML(w, "index.html", vars)
+	http.ServeFile(w, r, "html/index.html")
+	//outputHTML(w, "html/index.html", vars)
 }
