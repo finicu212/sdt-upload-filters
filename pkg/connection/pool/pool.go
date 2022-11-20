@@ -55,8 +55,13 @@ func (p Pool) DropConnection() {
 }
 
 func (p Pool) ReleaseConnection(connection connection.IConnection) error {
-	//TODO implement me
-	panic("implement me")
+	for i, c := range p.connections {
+		if c.GetUUID() == connection.GetUUID() {
+			_, p.connections = p.connections[i], p.connections[i:]
+			return nil
+		}
+	}
+	return fmt.Errorf("no connection found with UUID: %s", connection.GetUUID())
 }
 
 func (p Pool) GetConnection(ctx context.Context) (connection.IConnection, error) {

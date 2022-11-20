@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"html/template"
-	"io"
 	"net/http"
 	"os"
 	"sdt-upload-filters/pkg/connection"
 	"sdt-upload-filters/pkg/connection/pool"
+	"sdt-upload-filters/pkg/handler"
 )
 
 // Use templates to feed html file
@@ -78,10 +78,16 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		rf, err := os.Create(fmt.Sprintf("uploads/%s/%s", "user", fileHeader.Filename))
 		defer rf.Close()
 
-		_, err = io.Copy(rf, lf)
+		var chain handler.IHandler
+		chain = new(handler.Reverser)
+		chain.Handle(rf, lf)
+		//_, err = io.Copy(rf, lf)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Failed writing to file: %s", err.Error()), http.StatusInternalServerError)
 			return
 		}
 	}
+	vars := map[string]interface{}{"UUID": conn.GetUUID()}
+	//http.ServeFile(w, r, "submit.html")
+	outputHTML(w, "submit.html", vars)
 }
