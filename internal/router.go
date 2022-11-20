@@ -61,8 +61,6 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("UploadHandler with conn: %s", conn.GetUUID())
-
 	// 64MB RAM, rest temp files
 	if err := r.ParseMultipartForm(64 << 20); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

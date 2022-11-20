@@ -27,8 +27,10 @@
         });
     </script>
     <select multiple name="handlers">
-        <option value ="reverser" selected>Reverser</option>
-        <option value ="skipper" selected>Skip 16 Bytes (i.e. Image Headers)</option>
+        <option value="skipper" >Skip 16 Bytes (i.e. Image Headers)</option>
+        <option value="timed-skipper" selected>Timed -- Skip 16 Bytes (i.e. Image Headers)</option>
+        <option value="reverser" >Reverser</option>
+        <option value="logged-reverser" selected>Logged Reverser</option>
     </select>
     <input class="input file-input" type="file" name="file" multiple />
     <button class="button" type="submit">Submit</button>

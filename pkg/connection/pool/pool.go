@@ -78,7 +78,7 @@ func (p *Pool) GetConnection(ctx context.Context) (connection.IConnection, error
 	if p.activeConnections < ConnectionsLimit {
 		conn := connection.NewConnection(ctx)
 		p.activeConnections += 1
-		fmt.Printf("New connection: %s! (%d/%d)\n", conn.GetUUID(), len(p.connections), ConnectionsLimit)
+		fmt.Printf("New connection: %s! (%d/%d)\n", conn.GetUUID(), p.activeConnections, ConnectionsLimit)
 
 		return conn, nil
 	}

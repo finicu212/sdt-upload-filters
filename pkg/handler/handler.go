@@ -18,6 +18,10 @@ func stringToHandler(chain string) IHandler {
 		return Reverser{}
 	case "skipper":
 		return Skipper{}
+	case "timed-skipper":
+		return TimedSkipper{}
+	case "logged-reverser":
+		return LoggedReverser{}
 	case "default":
 	}
 	panic("wrong handler type: " + chain)
