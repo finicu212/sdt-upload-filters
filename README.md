@@ -1,6 +1,14 @@
+## What is this?
+This is a web app written in GO, capable of handling file uploads in parallel, with the user having the ability of adding "File Handlers" as a Responsibility Chain. This project was mainly an exercise for design patterns, hence incomplete front-end. Part of Software Development Techniques course taught by @andraevs. 
 
+![image](https://user-images.githubusercontent.com/44416281/202927867-52303446-18ef-4a5a-ac45-a2b4b065d4de.png)
+
+![image](https://user-images.githubusercontent.com/44416281/202927941-539e974e-a9f6-497c-b670-146ed4c2724f.png)
+
+## Original Task (@andraevs)
 Create a platform that allows to set up rules for ingesting and processing large amounts of data. The platform should allow selecting different data sources as streams (for example from network connections or files) and to configure a number of filters/handlers for each data stream. Result of each pipeline should also be collected in a configurable end destination. Filters can be duplicated, modified, composed. It must be possible to also attach loggers/observers to different parts of the pipeline for debugging.
 
+## Design phase
 
 Design patterns:
 
