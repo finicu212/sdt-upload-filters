@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"path"
 	"sdt-upload-filters/pkg/connection"
 	"sdt-upload-filters/pkg/connection/pool"
 	"sdt-upload-filters/pkg/handler"
@@ -74,12 +75,12 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Failed opening file header: %s", err.Error()), http.StatusInternalServerError)
 			return
 		}
-		err = os.MkdirAll("./uploads/user", os.ModePerm)
-		rf, err := os.Create(fmt.Sprintf("uploads/%s/%s", "user", fileHeader.Filename))
+		remoteFilePath := fmt.Sprintf("uploads/%s/%s", conn.GetUUID(), fileHeader.Filename)
+		err = os.MkdirAll(path.Dir(remoteFilePath), os.ModePerm)
+		rf, err := os.Create(remoteFilePath)
 		defer rf.Close()
 
-		var chain handler.IHandler
-		chain = new(handler.Reverser)
+		chain := handler.StringSliceToChain(r.MultipartForm.Value["handlers"])
 		chain.Handle(rf, lf)
 		//_, err = io.Copy(rf, lf)
 		if err != nil {
@@ -87,7 +88,10 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	vars := map[string]interface{}{"UUID": conn.GetUUID()}
-	//http.ServeFile(w, r, "submit.html")
-	outputHTML(w, "submit.html", vars)
+	err := pool.Instance().ReleaseConnection(conn)
+	if err != nil {
+		return
+	}
+	http.ServeFile(w, r, "index.html")
+	//outputHTML(w, "index.html", vars)
 }

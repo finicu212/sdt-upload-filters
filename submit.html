@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.css" />
     <title>File upload</title>
 </head>
 <body>
@@ -14,6 +18,18 @@
         action="/upload"
         method="POST"
 >
+
+    <script>
+        $(function() {
+            $('select').selectize({
+                plugins: ['remove_button', 'drag_drop']
+            });
+        });
+    </script>
+    <select multiple name="handlers">
+        <option value ="reverser" selected>Reverser</option>
+        <option value ="duplicator" selected>Duplicator</option>
+    </select>
     <input class="input file-input" type="file" name="file" multiple />
     <button class="button" type="submit">Submit</button>
 </form>

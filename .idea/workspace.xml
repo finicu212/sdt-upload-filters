@@ -5,97 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfd05e21-50d1-40bd-9a92-c4b24bc7bc6e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pkg/handler/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/handler/handler_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/connection/pool/pool.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/connection/pool/pool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/inconshreveable/mousetrap/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/inconshreveable/mousetrap/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/inconshreveable/mousetrap/trap_others.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/inconshreveable/mousetrap/trap_windows.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/inconshreveable/mousetrap/trap_windows_1.4.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/kardianos/ftps/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/kardianos/ftps/ftps.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/.golangci.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/.mailmap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/CONDUCT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/CONTRIBUTING.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/MAINTAINERS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/active_help.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/active_help.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/args.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/bash_completions.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/bash_completions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/bash_completionsV2.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/cobra.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/command.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/command_notwin.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/command_win.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/completions.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/fish_completions.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/fish_completions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/flag_groups.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/powershell_completions.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/powershell_completions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/projects_using_cobra.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/shell_completions.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/shell_completions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/user_guide.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/zsh_completions.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/cobra/zsh_completions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/bool.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/bool_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/bytes.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/count.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/duration.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/duration_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/flag.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/float32.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/float32_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/float64.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/float64_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/golangflag.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int16.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int32.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int32_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int64.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int64_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int8.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/int_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/ip.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/ip_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/ipmask.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/ipnet.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/string.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/string_array.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/string_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/string_to_int.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/string_to_int64.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/string_to_string.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/uint.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/uint16.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/uint32.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/uint64.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/uint8.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/spf13/pflag/uint_slice.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/golang.org/x/sync/AUTHORS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/golang.org/x/sync/CONTRIBUTORS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/golang.org/x/sync/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/golang.org/x/sync/PATENTS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/golang.org/x/sync/errgroup/errgroup.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/modules.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/modules.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/handler/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/handler/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/submit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +68,7 @@
       <recent name="$PROJECT_DIR$/pkg/file" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go">
+  <component name="RunManager" selected="Go Test.TestStringSliceToChain in sdt-upload-filters/pkg/handler">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="sdt-upload-filters" />
       <working_directory value="$PROJECT_DIR$" />
@@ -188,16 +103,28 @@
       <pattern value="^\QTestPool_existingConnection\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestPool_existingConnection/Only_one_existing_connection in sdt-upload-filters/pkg/connection" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestStringSliceToChain in sdt-upload-filters/pkg/handler" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="sdt-upload-filters" />
-      <working_directory value="$PROJECT_DIR$/pkg/connection" />
+      <working_directory value="$PROJECT_DIR$/pkg/handler" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="sdt-upload-filters/pkg/connection" />
+      <package value="sdt-upload-filters/pkg/handler" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestPool_existingConnection\E$/^\QOnly_one_existing_connection\E$" />
+      <pattern value="^\QTestStringSliceToChain\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestStringSliceToChain/reverser_-&gt;_reverser_-&gt;_duplicator in sdt-upload-filters/pkg/handler" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="sdt-upload-filters" />
+      <working_directory value="$PROJECT_DIR$/pkg/handler" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sdt-upload-filters/pkg/handler" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestStringSliceToChain\E$/^\Qreverser_-&gt;_reverser_-&gt;_duplicator\E$" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -225,15 +152,17 @@
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Remote.Unnamed" />
       <item itemvalue="Go Test.TestPool_existingConnection in sdt-upload-filters/pkg/connection/pool" />
-      <item itemvalue="Go Test.TestPool_existingConnection/Only_one_existing_connection in sdt-upload-filters/pkg/connection" />
+      <item itemvalue="Go Test.TestStringSliceToChain in sdt-upload-filters/pkg/handler" />
+      <item itemvalue="Go Test.TestStringSliceToChain/reverser_-&gt;_reverser_-&gt;_duplicator in sdt-upload-filters/pkg/handler" />
       <item itemvalue="Go Test.go test sdt-upload-filters/pkg/connection" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestStringSliceToChain in sdt-upload-filters/pkg/handler" />
+        <item itemvalue="Go Test.TestStringSliceToChain/reverser_-&gt;_reverser_-&gt;_duplicator in sdt-upload-filters/pkg/handler" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Test.TestPool_existingConnection in sdt-upload-filters/pkg/connection/pool" />
         <item itemvalue="Go Test.go test sdt-upload-filters/pkg/connection" />
-        <item itemvalue="Go Test.TestPool_existingConnection/Only_one_existing_connection in sdt-upload-filters/pkg/connection" />
       </list>
     </recent_temporary>
   </component>

@@ -35,6 +35,12 @@ var (
 	lock     = &sync.Mutex{}
 )
 
+func newPool() IPool {
+	p := new(Pool)
+	p.connections = make([]connection.IConnection, 0)
+	return p
+}
+
 func Instance() IPool {
 	lock.Lock()
 	defer lock.Unlock()
@@ -43,7 +49,7 @@ func Instance() IPool {
 		// 1. We can put concrete class pointers in interfaces.
 		// 2. Thread safe, since we use a mutex lock
 		fmt.Printf("New instance created\n")
-		instance = new(Pool)
+		instance = newPool()
 	}
 
 	return instance
