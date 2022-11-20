@@ -14,9 +14,9 @@ func TestStringSliceToChain(t *testing.T) {
 		rev.SetNext(r())
 		return rev
 	}
-	rrd := func() IHandler {
+	rrs := func() IHandler {
 		rev := rr()
-		rev.SetNext(Duplicator{})
+		rev.SetNext(Skipper{})
 		return rev
 	}
 
@@ -36,9 +36,9 @@ func TestStringSliceToChain(t *testing.T) {
 			want: r(),
 		},
 		{
-			name: "reverser -> reverser -> duplicator",
-			args: []string{"reverser", "reverser", "duplicator"},
-			want: rrd(),
+			name: "reverser -> reverser -> skipper",
+			args: []string{"reverser", "reverser", "skipper"},
+			want: rrs(),
 		},
 	}
 	for _, tt := range tests {
