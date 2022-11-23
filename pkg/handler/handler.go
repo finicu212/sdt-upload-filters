@@ -48,6 +48,8 @@ type Reverser struct {
 	next IHandler
 }
 
+var _ IHandler = new(Reverser)
+
 func (h Reverser) Handle(writer io.Writer, reader io.Reader) {
 	b, err := ioutil.ReadAll(reader)
 	if err != nil {
@@ -72,6 +74,8 @@ func (h Reverser) SetNext(handler IHandler) IHandler {
 type Skipper struct {
 	next IHandler
 }
+
+var _ IHandler = new(Skipper)
 
 func (h Skipper) Handle(writer io.Writer, reader io.Reader) {
 	b, err := ioutil.ReadAll(reader)

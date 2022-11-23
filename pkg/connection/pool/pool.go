@@ -31,6 +31,8 @@ type Pool struct {
 	activeConnections int
 }
 
+var _ IPool = new(Pool) // Must fail to compile if Pool doesn't implement IPool
+
 var (
 	instance IPool
 	lock     = &sync.Mutex{}

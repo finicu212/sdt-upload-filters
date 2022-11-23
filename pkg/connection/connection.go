@@ -13,6 +13,8 @@ type MockConnection struct {
 	UUID string
 }
 
+var _ IConnection = new(MockConnection)
+
 func (m MockConnection) GetUUID() string {
 	return m.UUID
 }
